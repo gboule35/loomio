@@ -86,6 +86,7 @@ class DevelopmentController < ApplicationController
     subscription = test_group.subscription
     subscription.update_attribute :kind, 'paid'
     redirect_to group_url(test_group)
+  end
 
   def setup_public_group_with_public_content
     cleanup_database
