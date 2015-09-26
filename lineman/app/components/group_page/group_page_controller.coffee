@@ -5,7 +5,7 @@ angular.module('loomioApp').controller 'GroupPageController', ($rootScope, $rout
     @group = group
     $rootScope.$broadcast 'currentComponent', { page: 'groupPage' }
     $rootScope.$broadcast 'viewingGroup', @group
-    $rootScope.$broadcast 'setTitle', @group.fullName()
+    $rootScope.$broadcast 'setTitle', @group.fullName
     $rootScope.$broadcast 'analyticsSetGroup', @group
     $rootScope.$broadcast 'trialIsOverdue', @group if @group.trialIsOverdue()
     MessageChannelService.subscribeToGroup(@group)

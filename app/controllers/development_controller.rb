@@ -86,6 +86,14 @@ class DevelopmentController < ApplicationController
     subscription = test_group.subscription
     subscription.update_attribute :kind, 'paid'
     redirect_to group_url(test_group)
+
+  def setup_public_group_with_public_content
+    cleanup_database
+    sign_in patrick
+    another_test_group
+    public_test_discussion
+    patrick.memberships.first.destroy
+    redirect_to discussion_url(public_test_discussion)
   end
 
   def setup_multiple_discussions
