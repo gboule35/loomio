@@ -1,0 +1,25 @@
+.group-page__theme
+  .group-page__cover{ng-style:'coverStyle()'}
+    %button.lmo-btn-link.group-page__upload-photo{ng-click: 'openUploadCoverForm()', ng-if: 'canUploadPhotos()'}
+      %i.fa.fa-lg.fa-camera
+  %section.group-page__header{aria-label: "{{ 'group_page.header.aria_label' | translate }}"}
+    .group-page__logo{ng-style:'logoStyle()', alt: "{{ 'group_page.group_logo' | translate }}"}
+      %button.lmo-btn-link.group-page__upload-photo{ng-click: 'openUploadLogoForm()', ng-if: 'canUploadPhotos()'}
+        %i.fa.fa-lg.fa-camera
+    .group-page__name-and-actions
+      .group-page__name
+        %h1.lmo-h1
+          %a{ng-if: 'group.isSubgroup()', lmo-href-for: 'group.parent'}
+            {{group.parentName()}}
+          %span{ng-if: 'group.isSubgroup()'}> \-
+          %a{lmo-href-for: 'group'}
+            {{group.name}}
+      .group-page__actions{ng-if: 'homePage'}
+        %group_privacy_dropdown{group: 'group'}
+        .group-page__member-actions.lmo-btn-group.lmo-btn-group-right{ng-if: 'isMember()'}
+          .lmo-btn-wrapper
+            %group_actions_dropdown{group: 'group'}
+          .lmo-btn-wrapper
+            %notification_volume_dropdown{translate-root: 'group_page', group: 'group'}
+        %join_group_button{group: 'group'}
+      .clearfix
