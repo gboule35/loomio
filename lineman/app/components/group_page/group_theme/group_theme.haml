@@ -2,14 +2,25 @@
   .group-page__cover{ng-style:'coverStyle()'}
     %button.lmo-btn-link.group-page__upload-photo{ng-click: 'openUploadCoverForm()', ng-if: 'canUploadPhotos()'}
       %i.fa.fa-lg.fa-camera
-  %section.group-page__header{aria-label: "{{ 'group_page.header.aria_label' | translate }}"}
+
+  %section.group-page__header--compact{ng-if: 'compact', aria-label: "{{ 'thread_group.aria_label | translate'}}"}
+    .group-page__logo--compact{aria-hidden: 'true'}
+      %img{ng-src: "{{group.logoUrl()}}"}
+    .group-page__name--compact
+      %a{ng-if: 'group.isSubgroup()', lmo-href-for: 'group.parent()'}
+        {{group.parentName()}}
+      %span{ng-if: 'group.isSubgroup()'}> \-
+      %a{lmo-href-for: 'group'}
+        {{group.name}}
+
+  %section.group-page__header{ng-if: '!compact', aria-label: "{{ 'group_page.header.aria_label' | translate }}"}
     .group-page__logo{ng-style:'logoStyle()', alt: "{{ 'group_page.group_logo' | translate }}"}
       %button.lmo-btn-link.group-page__upload-photo{ng-click: 'openUploadLogoForm()', ng-if: 'canUploadPhotos()'}
         %i.fa.fa-lg.fa-camera
     .group-page__name-and-actions
       .group-page__name
         %h1.lmo-h1
-          %a{ng-if: 'group.isSubgroup()', lmo-href-for: 'group.parent'}
+          %a{ng-if: 'group.isSubgroup()', lmo-href-for: 'group.parent()'}
             {{group.parentName()}}
           %span{ng-if: 'group.isSubgroup()'}> \-
           %a{lmo-href-for: 'group'}

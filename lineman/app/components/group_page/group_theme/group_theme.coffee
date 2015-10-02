@@ -1,5 +1,5 @@
 angular.module('loomioApp').directive 'groupTheme', ->
-  scope: {group: '=', homePage: '='}
+  scope: {group: '=', homePage: '=', compact: '='}
   restrict: 'E'
   templateUrl: 'generated/components/group_page/group_theme/group_theme.html'
   replace: true
@@ -9,13 +9,13 @@ angular.module('loomioApp').directive 'groupTheme', ->
       { 'background-image': "url(#{$scope.group.logoUrl()})" }
 
     $scope.coverStyle = ->
-      { 'background-image': "url(#{$scope.group.coverUrl()})" }
+      { 'background-image': "url(#{$scope.group.coverUrl()})", 'z-index': (-1 if $scope.compact) }
 
     $scope.isMember = ->
       CurrentUser.membershipFor($scope.group)?
 
     $scope.canUploadPhotos = ->
-      AbilityService.canAdministerGroup($scope.group)
+      $scope.homePage and AbilityService.canAdministerGroup($scope.group)
 
     $scope.openUploadCoverForm = ->
       ModalService.open CoverPhotoForm, group: => $scope.group
